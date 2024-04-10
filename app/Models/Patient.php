@@ -11,6 +11,11 @@ class Patient extends Model
     use HasFactory;
     protected $fillable = ['name', 'last_name', 'email', 'age', 'note'];
 
+    public function consultations()
+    {
+        return $this->belongsTo(Consultation::class);
+    }
+
     protected function name(): Attribute {
 
         return new Attribute(
