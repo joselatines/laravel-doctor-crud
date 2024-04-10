@@ -42,7 +42,7 @@ class PatientController extends Controller
         return redirect()->route("dashboard.patients")->with("success", "Patient deleted successfully");
     }
 
-    public function create(Request $request): RedirectResponse
+    public function create(Request $request): RedirectResponse | View
     {
         if ($request->isMethod('get')) {
             return view('patients.create');

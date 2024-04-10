@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('last_name');
             $table->string('email');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->integer('age');
             $table->timestamps();
         });
