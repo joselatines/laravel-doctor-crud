@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Patient
+    Pacientes
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Patient') }}
+                                {{ __('Pacientes') }}
                             </span>
 
                              <div class="float-right">
@@ -36,11 +36,11 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Name</th>
-										<th>Last Name</th>
-										<th>Email</th>
-										<th>Note</th>
-										<th>Age</th>
+										<th>Nombre</th>
+										<th>Apellido</th>
+										<th>Correo electronico</th>
+										<th>Edad</th>
+										<th>Nota</th>
 
                                         <th></th>
                                     </tr>
@@ -53,16 +53,16 @@
 											<td>{{ $patient->name }}</td>
 											<td>{{ $patient->last_name }}</td>
 											<td>{{ $patient->email }}</td>
-											<td>{{ $patient->note }}</td>
 											<td>{{ $patient->age }}</td>
+											<td>{{ $patient->note }}</td>
 
                                             <td>
-                                                <form action="{{ route('patients.destroy',$patient->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('patients.show',$patient->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('patients.edit',$patient->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form class="gap-1 flex-wrap d-flex justify-content-center align-items-center" action="{{ route('patients.destroy',$patient->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('patients.show',$patient->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver mas') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('patients.edit',$patient->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
                                                 </form>
                                             </td>
                                         </tr>

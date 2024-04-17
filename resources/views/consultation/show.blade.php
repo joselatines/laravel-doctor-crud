@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ $consultation->name ?? __('Show') . " " . __('Consultation') }}
+    {{ $consultation->name ?? __('Show') . " " . __('Consultas') }}
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Consultation</span>
+                            <span class="card-title">{{ __('Show') }} Consultas</span>
                         </div>
                         <div class="float-right">
                             <a class="btn btn-primary btn-sm" href="{{ route('consultations.index') }}"> {{ __('Back') }}</a>
@@ -21,15 +21,15 @@
                     <div class="card-body bg-white">
                         
                         <div class="form-group mb-2 mb20">
-                            <strong>Note:</strong>
+                            <strong>Nota:</strong>
                             {{ $consultation->note }}
                         </div>
                         <div class="form-group mb-2 mb20">
-                            <strong>Date:</strong>
+                            <strong>Fecha:</strong>
                             {{ $consultation->date }}
                         </div>
                         <div class="form-group mb-2 mb20">
-                            <strong>Patient Id:</strong>
+                            <strong>Paciente ID:</strong>
                             {{ $consultation->patient_id }}
                         </div>
 

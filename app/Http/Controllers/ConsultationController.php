@@ -19,7 +19,11 @@ class ConsultationController extends Controller
     {
         $consultations = Consultation::with('patient')->paginate(); // Eager load the 'patient' relationship
         $patients = Patient::all();
-        return view('consultation.index', ['consultations' => $consultations, 'patients' => $patients]);
+
+        return view('consultation.index', ['consultations' => $consultations, 'patients' => $patients])
+        ->with('i', (request()->input('page', 1) - 1) * $consultations->perPage());
+
+        // return view('consultation.index', ['consultations' => $consultations, 'patients' => $patients]);
     }
 
     /**

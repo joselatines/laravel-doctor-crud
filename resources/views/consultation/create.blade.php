@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ __('Create') }} Consultation
+    {{ __('Create') }} Consultas
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Consultation</span>
+                        <span class="card-title">{{ __('Create') }} Consultas</span>
                     </div>
                     <div class="card-body bg-white">
                         <form method="POST" action="{{ route('consultations.store') }}"  role="form" enctype="multipart/form-data">

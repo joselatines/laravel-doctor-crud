@@ -14,7 +14,12 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <a href="{{ route('patients.index') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                        Ver pacientes
+                    </a>
+                    <a href="{{ route('consultations.index') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                        Ver consultas
+                    </a>
                 </div>
             </div>
         </div>

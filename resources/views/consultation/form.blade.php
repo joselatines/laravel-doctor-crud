@@ -2,8 +2,8 @@
     <div class="col-md-12">
         
         <div class="form-group mb-2 mb20">
-            <label for="note" class="form-label">{{ __('Note') }}</label>
-            <input type="text" name="note" class="form-control @error('note') is-invalid @enderror" value="{{ old('note', $consultation?->note) }}" id="note" placeholder="Note">
+            <label for="note" class="form-label">{{ __('Nota') }}</label>
+            <input type="text" name="note" class="form-control @error('note') is-invalid @enderror" value="{{ old('note', $consultation?->note) }}" id="note" placeholder="Paciente viene referido del Dr. Juean">
             {!! $errors->first('note', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
 
