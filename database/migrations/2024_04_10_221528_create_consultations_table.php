@@ -17,7 +17,7 @@ return new class extends Migration
             $table->dateTime("date");
             $table->foreignId('patient_id')->constrained( 
                 table: 'patients', indexName: 'consultations_patient_id'
-            );
+            )->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

@@ -17,10 +17,13 @@ class PatientFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'=> $this->faker->word(),
-            'last_name'=> $this->faker->word(),
-            'email'=> $this->faker->unique()->email(),
-            'age'=> $this->faker->numberBetween(1, 100)
+            'name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'email' => $this->faker->unique()->safeEmail,
+            'note' => $this->faker->optional()->text,
+            'age' => $this->faker->numberBetween(18, 100),
+            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

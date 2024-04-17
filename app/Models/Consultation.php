@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Consultation extends Model
 {
-    
+    use HasFactory;
 
     protected $perPage = 20;
 
@@ -37,7 +38,7 @@ class Consultation extends Model
      */
     public function patient()
     {
-        return $this->belongsTo(\App\Models\Patient::class, 'patient_id', 'id');
+        return $this->belongsTo(Patient::class, 'patient_id', 'id');
     }
     
 

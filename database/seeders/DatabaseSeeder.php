@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Consultation;
 use App\Models\Patient;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,7 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        Patient::factory(20)->create();
+        Patient::factory(100)->create();
+        Consultation::factory(50)->create();
 
         //$this->call(PatientSeeder::class);
 

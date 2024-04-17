@@ -2,35 +2,46 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Patient
+ *
+ * @property $id
+ * @property $name
+ * @property $last_name
+ * @property $email
+ * @property $note
+ * @property $age
+ * @property $created_at
+ * @property $updated_at
+ *
+ * @property Consultation[] $consultations
+ * @package App
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ */
 class Patient extends Model
 {
+    
     use HasFactory;
-    protected $fillable = ['name', 'last_name', 'email', 'age', 'note'];
+    protected $perPage = 20;
 
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'last_name', 'email', 'note', 'age'];
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function consultations()
     {
-        return $this->belongsTo(Consultation::class);
+        return $this->hasMany(Consultation::class, 'id', 'patient_id');
     }
+    
 
-    protected function name(): Attribute {
-
-        return new Attribute(
-            get: fn($value) => ucwords($value),
-            set: function($value) {
-                return strtolower($value);
-            }
-        );
-    }
-
-    protected function last_name(): Attribute {
-        return new Attribute(
-            set: function($value){
-                return strtolower($value);
-            }
-        );
-    }
 }

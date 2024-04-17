@@ -3,61 +3,81 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use App\Http\Requests\PatientRequest;
 
+/**
+ * Class PatientController
+ * @package App\Http\Controllers
+ */
 class PatientController extends Controller
 {
-    public function show(): View
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        $patients = Patient::all();
-        return view('patients.index', compact('patients'));
+        $patients = Patient::paginate();
+
+        return view('patient.index', compact('patients'))
+            ->with('i', (request()->input('page', 1) - 1) * $patients->perPage());
     }
 
-    public function update(Request $request, string $id): RedirectResponse | View
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        $patient = Patient::findOrFail($id);
-        
-        if ($request->isMethod('get')) {
-            return view('patients.edit', compact('patient'));
-        }
-
-        $patient->update([
-            'name' => $request->input('name'),
-            'last_name' => $request->input('last_name'),
-            'email' => $request->input('email'),
-            'age' => $request->input('age'),
-            'note' => $request->input('note'),
-        ]);
-
-        return redirect()->route("dashboard.patients")->with("success", "Patient edited");
-    }
-
-    public function destroy(String $id)
-    {
-        $todo = Patient::find($id);
-        $todo->delete();
-
-        return redirect()->route("dashboard.patients")->with("success", "Patient deleted successfully");
-    }
-
-    public function create(Request $request): RedirectResponse | View
-    {
-        if ($request->isMethod('get')) {
-            return view('patients.create');
-        }
-
         $patient = new Patient();
+        return view('patient.create', compact('patient'));
+    }
 
-        $patient->name = $request->input('name');
-        $patient->last_name = $request->input('last_name');
-        $patient->age = $request->input('age');
-        $patient->email = $request->input('email');
-        $patient->note = $request->input('note');
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(PatientRequest $request)
+    {
+        Patient::create($request->validated());
 
-        $patient->save();
+        return redirect()->route('patients.index')
+            ->with('success', 'Patient created successfully.');
+    }
 
-        return redirect()->route("dashboard.patients")->with("success", "Patient created successfully");
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $patient = Patient::find($id);
+
+        return view('patient.show', compact('patient'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
+    {
+        $patient = Patient::find($id);
+
+        return view('patient.edit', compact('patient'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(PatientRequest $request, Patient $patient)
+    {
+        $patient->update($request->validated());
+
+        return redirect()->route('patients.index')
+            ->with('success', 'Patient updated successfully');
+    }
+
+    public function destroy($id)
+    {
+        Patient::find($id)->delete();
+
+        return redirect()->route('patients.index')
+            ->with('success', 'Patient deleted successfully');
     }
 }

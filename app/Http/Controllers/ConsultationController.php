@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Consultation;
 use App\Http\Requests\ConsultationRequest;
+use App\Models\Patient;
 
 /**
  * Class ConsultationController
@@ -16,10 +17,9 @@ class ConsultationController extends Controller
      */
     public function index()
     {
-        $consultations = Consultation::paginate();
-
-        return view('consultation.index', compact('consultations'))
-            ->with('i', (request()->input('page', 1) - 1) * $consultations->perPage());
+        $consultations = Consultation::with('patient')->paginate(); // Eager load the 'patient' relationship
+        $patients = Patient::all();
+        return view('consultation.index', ['consultations' => $consultations, 'patients' => $patients]);
     }
 
     /**
@@ -28,7 +28,8 @@ class ConsultationController extends Controller
     public function create()
     {
         $consultation = new Consultation();
-        return view('consultation.create', compact('consultation'));
+        $patients = Patient::all();
+        return view('consultation.create',  ['consultation' => $consultation, 'patients' => $patients]);
     }
 
     /**
@@ -58,8 +59,8 @@ class ConsultationController extends Controller
     public function edit($id)
     {
         $consultation = Consultation::find($id);
-
-        return view('consultation.edit', compact('consultation'));
+        $patients = Patient::all();
+        return view('consultation.create',  ['consultation' => $consultation, 'patients' => $patients]);
     }
 
     /**
