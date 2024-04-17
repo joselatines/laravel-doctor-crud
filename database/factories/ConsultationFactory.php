@@ -18,7 +18,7 @@ class ConsultationFactory extends Factory
     public function definition(): array
     {
         return [
-            'note' => $this->faker->sentence,
+            'note' => $this->faker->paragraph(),
             'date' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'patient_id' => Patient::factory()->create()->id,
         ];

@@ -16,7 +16,7 @@
             <label for="patient_id" class="form-label">Selecciona un paciente</label>
             <select class="form-select" name="patient_id" id="patient_id">
                 @foreach ($patients as $patient)
-                <option value="{{$patient->id}}">{{$patient->name}}</option>
+                <option value="{{$patient->id}}">{{$patient->name}} {{$patient->last_name}}</option>
                 @endforeach
             </select>
 
@@ -27,6 +27,6 @@
 
     </div>
     <div class="col-md-12 mt20 mt-2">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+        <button type="submit" class="btn btn-primary">{{ __('Enviar') }}</button>
     </div>
 </div>

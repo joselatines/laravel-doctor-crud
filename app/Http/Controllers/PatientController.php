@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use App\Http\Requests\PatientRequest;
+use App\Models\Consultation;
 
 /**
  * Class PatientController
@@ -16,7 +17,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = Patient::paginate();
+        $patients = Patient::orderBy('updated_at', 'desc')->orderBy('name')->paginate();
 
         return view('patient.index', compact('patients'))
             ->with('i', (request()->input('page', 1) - 1) * $patients->perPage());
@@ -48,8 +49,9 @@ class PatientController extends Controller
     public function show($id)
     {
         $patient = Patient::find($id);
-
-        return view('patient.show', compact('patient'));
+        $consultations = Consultation::all()->where('patient_id', $id);
+        
+        return view('patient.show', compact('patient', 'consultations'));
     }
 
     /**

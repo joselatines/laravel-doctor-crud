@@ -37,7 +37,7 @@
                                         <th>No</th>
 										<th>Nota</th>
 										<th>Fecha</th>
-										<th>Paciente ID</th>
+										<th>Paciente</th>
 
                                         <th></th>
                                     </tr>
@@ -48,7 +48,7 @@
                                             <td>{{ ++$i }}</td>
 											<td>{{ $consultation->note }}</td>
 											<td>{{ \Carbon\Carbon::parse($consultation->date)->format('d-m-Y H:i') }}</td>
-											<td> <a href="{{ route('patients.show',$consultation->patient->id) }}">{{ $consultation->patient->name }}</a></td>
+											<td> <a href="{{ route('patients.show',$consultation->patient->id) }}">{{ $consultation->patient->name }} {{ $consultation->patient->last_name }}</a></td>
 
                                             <td>
                                                 <form class="gap-1 flex-wrap d-flex justify-content-center align-items-center" action="{{ route('consultations.destroy',$consultation->id) }}" method="POST">

@@ -17,7 +17,7 @@ class ConsultationController extends Controller
      */
     public function index()
     {
-        $consultations = Consultation::with('patient')->paginate(); // Eager load the 'patient' relationship
+        $consultations = Consultation::with('patient')->orderBy('updated_at', 'desc')->orderBy('date', 'desc')->paginate(); // Eager load the 'patient' relationship
         $patients = Patient::all();
 
         return view('consultation.index', ['consultations' => $consultations, 'patients' => $patients])
@@ -53,8 +53,9 @@ class ConsultationController extends Controller
     public function show($id)
     {
         $consultation = Consultation::find($id);
+        $patient = Patient::find($consultation->patient_id);
 
-        return view('consultation.show', compact('consultation'));
+        return view('consultation.show', compact('consultation', 'patient'));
     }
 
     /**
