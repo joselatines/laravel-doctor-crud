@@ -39,7 +39,7 @@
 										<th>Fecha</th>
 										<th>Paciente</th>
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,8 +51,8 @@
 											<td> <a href="{{ route('patients.show',$consultation->patient->id) }}">{{ $consultation->patient->name }} {{ $consultation->patient->last_name }}</a></td>
 
                                             <td>
-                                                <form class="gap-1 flex-wrap d-flex justify-content-center align-items-center" action="{{ route('consultations.destroy',$consultation->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('consultations.show',$consultation->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver mas') }}</a>
+                                                <form class="gap-1 d-flex justify-content-center align-items-center" action="{{ route('consultations.destroy',$consultation->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('consultations.show',$consultation->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver más') }}</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('consultations.edit',$consultation->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')

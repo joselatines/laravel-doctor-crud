@@ -17,18 +17,14 @@ class ConsultationController extends Controller
      */
     public function index()
     {
-        $consultations = Consultation::with('patient')->orderBy('updated_at', 'desc')->orderBy('date', 'desc')->paginate(); // Eager load the 'patient' relationship
+        $consultations = Consultation::with('patient')->orderBy('updated_at', 'desc')->orderBy('date', 'desc')->paginate(10); // Eager load the 'patient' relationship
         $patients = Patient::all();
 
         return view('consultation.index', ['consultations' => $consultations, 'patients' => $patients])
         ->with('i', (request()->input('page', 1) - 1) * $consultations->perPage());
-
-        // return view('consultation.index', ['consultations' => $consultations, 'patients' => $patients]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+ 
     public function create()
     {
         $consultation = new Consultation();
@@ -36,20 +32,14 @@ class ConsultationController extends Controller
         return view('consultation.create',  ['consultation' => $consultation, 'patients' => $patients]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(ConsultationRequest $request)
     {
         Consultation::create($request->validated());
 
         return redirect()->route('consultations.index')
-            ->with('success', 'Consultation created successfully.');
+            ->with('success', 'Consulta creada');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         $consultation = Consultation::find($id);
@@ -58,9 +48,7 @@ class ConsultationController extends Controller
         return view('consultation.show', compact('consultation', 'patient'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit($id)
     {
         $consultation = Consultation::find($id);
@@ -76,7 +64,7 @@ class ConsultationController extends Controller
         $consultation->update($request->validated());
 
         return redirect()->route('consultations.index')
-            ->with('success', 'Consultation updated successfully');
+            ->with('success', 'Consulta editada');
     }
 
     public function destroy($id)
@@ -84,6 +72,6 @@ class ConsultationController extends Controller
         Consultation::find($id)->delete();
 
         return redirect()->route('consultations.index')
-            ->with('success', 'Consultation deleted successfully');
+            ->with('success', 'Consulta eliminada');
     }
 }

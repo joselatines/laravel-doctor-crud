@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Patient;
 use App\Http\Requests\PatientRequest;
 use App\Models\Consultation;
+use Illuminate\Http\Request;
 
 /**
  * Class PatientController
@@ -17,7 +18,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = Patient::orderBy('updated_at', 'desc')->orderBy('name')->paginate();
+        $patients = Patient::orderBy('updated_at', 'desc')->orderBy('name')->paginate(10);
 
         return view('patient.index', compact('patients'))
             ->with('i', (request()->input('page', 1) - 1) * $patients->perPage());
@@ -26,8 +27,9 @@ class PatientController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+        
         $patient = new Patient();
         return view('patient.create', compact('patient'));
     }
@@ -40,7 +42,7 @@ class PatientController extends Controller
         Patient::create($request->validated());
 
         return redirect()->route('patients.index')
-            ->with('success', 'Patient created successfully.');
+            ->with('success', 'Paciente creado');
     }
 
     /**
@@ -72,7 +74,7 @@ class PatientController extends Controller
         $patient->update($request->validated());
 
         return redirect()->route('patients.index')
-            ->with('success', 'Patient updated successfully');
+            ->with('success', 'Paciente editado');
     }
 
     public function destroy($id)
@@ -80,6 +82,6 @@ class PatientController extends Controller
         Patient::find($id)->delete();
 
         return redirect()->route('patients.index')
-            ->with('success', 'Patient deleted successfully');
+            ->with('success', 'Paciente eliminado');
     }
 }

@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        Patient::factory(7)->create();
-        Consultation::factory(10)->create();
+        Patient::factory(25)->create();
+        Consultation::factory(30)->create();
 
         //$this->call(PatientSeeder::class);
 
